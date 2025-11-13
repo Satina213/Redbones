@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Printable Catering Form</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #fff;
+            margin: 40px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            border: 2px solid #333;
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .label {
+            font-weight: 600;
+        }
+
+        .print-btn {
+            display: block;
+            margin: 30px auto 0;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .print-btn:hover {
+            background: #0056b3;
+        }
+
+        @media print {
+            .print-btn {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Catering Event Details</h1>
+        <div class="info"><span class="label">Event Date:</span> <span id="printDate"></span></div>
+        <div class="info"><span class="label">Location:</span> <span id="printLocation"></span></div>
+        <div class="info"><span class="label">Number of People:</span> <span id="printPeople"></span></div>
+        <div class="info"><span class="label">Food to Bring:</span></div>
+        <div class="info" id="printFood"
+            style="white-space: pre-wrap; border: 1px solid #ccc; padding: 10px; border-radius: 8px;"></div>
+        <button class="print-btn" onclick="window.print()">🖨️ Print Form</button>
+    </div>
+
+    <script>
+        const data = JSON.parse(localStorage.getItem("eventData"));
+        if (data) {
+            document.getElementById("printDate").textContent = data.date;
+            document.getElementById("printLocation").textContent = data.location;
+            document.getElementById("printPeople").textContent = data.people;
+            document.getElementById("printFood").textContent = data.food;
+        } else {
+            document.body.innerHTML = "<h2>No event data found. Please go back and fill out the form.</h2>";
+        }
+    </script>
+</body>
+
+</html>
